@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>四张广告图任意切换</title>
+		<style>
+			/*清除内外边距*/
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#content{
+				width: 940px;
+				height: 450px;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content" onmouseover="stopChange()" onmouseout="resumeChange()">
+			<img id="adv" src="img/slide-1.jpg">
+			
+		</div>
+		<script>
+			
+			var img = document.getElementById('adv');
+			var currentIndex = 0;
+			var timerId = 0;
+			
+			resumeChange();
+			
+			function stopChange() {
+				window.clearInterval(timerId);
+			}
+			
+			function resumeChange() {
+				timerId = setInterval(function() {
+					currentIndex += 1;
+					currentIndex %= 4;
+					img.src = 'img/slide-' + (currentIndex + 1) + '.jpg';
+				}, 3000);
+			}
+		</script>
+		</body>
+</html>		
+		

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用选择器定位元素</title>
+	</head>
+	<body>
+		<div id="page">
+			<h1 id="header">List</h1>
+			<h2>Buy groceries</h2>
+			
+			<ul>
+				<li id="one" class="hot"><em>fresh</em>&nbsp;figs</li>
+				<li id="two" class="hot">pine nuts</li>
+				<li id="three" class="hot">honey</li>
+				<li id="four">balsamic vinegar</li>
+			</ul>
+			
+			<script src="js/list.js"></script>
+				
+		</div>
+		<script>
+			//找到id= page 下，class= hot的元素
+			var elems = document.querySelectorAll('#page .hot');
+			for(var i=0;i<elems.length;i+=1){
+//				alert(elems[i].textContent);
+				alert(elems[i].innerHTML);
+			}
+			//取唯一一个元素
+			var em = document.querySelector('#one>em');
+			alert(em.textContent);
+			
+			
+		</script>
+	</body>
+</html>

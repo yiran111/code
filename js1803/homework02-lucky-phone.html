@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#tel{
+				width: 500px;
+				height: 100px;
+				/*内容水平居中*/
+				text-align: center;
+				/*z设置字体粗细   字体大小/行高与高度相等让其垂直居中   字体名字*/
+				font: bold 72px/100px arial;
+				/*让div 居中*/
+				margin: 50px auto;
+				background-color: blue;
+				color: yellow;
+			}
+			
+			#buttons{
+				width: 500px;
+				text-align: center;
+				margin: 0 auto;
+			}
+			
+			#buttons button{
+				display: inline-block;
+				width: 120px;
+				height: 40px;
+				background-color: red;
+				color: white;
+				font: 28px/40px '微软雅黑';
+				/*去边框*/
+				border: none;
+				/*增加按钮之间的间距,设置左边距就可以了*/
+				margin: 0 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--写代码时遵循：高内聚，低耦合-->
+		
+		<div id="tel">13550270200</div>
+		<div id="buttons">
+		<!--事件和button放在一起，就是标签与js耦合了，以后不方便代码的维护-->
+			<!--<button onclick="start()">开始</button>
+			<button onclick="stop()">停止</button>-->
+			<button id="startButton">开始</button>
+			<button id='stopButton'>停止</button>
+			
+			<script>
+				//在js里，不能使用负的下标
+				//随机生成电话号码
+				var tels = [];
+				for(var i=0;i<100;i+=1){
+					tel = '13';
+					for(j=0;j<9;j+=1){
+						tel += parseInt(Math.random()*10);//产生0~9的随机整数
+					}
+					tels[i] = tel;
+				}
+				
+				var luckyTel ='';
+				var timerId = 0;
+				
+				var startButton = document.getElementById('startButton');
+				var stopButton = document.getElementById('stopButton');
+				
+				//=============================回调函数====兼容性特别好=======================
+				//给标签绑定事件回调函数（callback）
+				//回调函数：用在 当我不知道事件发生，但我知道要做什么的时候就使用回调函数，
+				//将事件与函数绑定在一起，当点击事件发生时，就调用这个函数，是人家调用这个函数，不是函数本身调用这个函数
+				
+				startButton.onclick = function(){
+					timerId = setInterval(function(){
+						var index =parseInt( Math.random() * tels.length);//随机生成一个列表的索引0~99
+						
+						// 通过下标索引取到div里的内容，然后通过赋值，修改里面的内容，把列表放到div 里
+						luckyTel = tels[index];
+						
+						//隐去中间四位 substring(,):字符串取子串
+						displayTel = luckyTel.substring(0,3) + '****' + luckyTel.substring(7,11);
+						
+						document.getElementById('tel').textContent = displayTel;
+					
+					},50);
+				};
+				stopButton.onclick = function(){
+					clearInterval(timerId);
+					alert('被抽中的幸运号码是：'+ luckyTel);
+				};
+			</script>
+			
+		</div>
+	</body>
+</html>

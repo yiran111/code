@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--1、getElementById()：
+		接收一个参数：要取得的元素的ID(区分大小写，必须严格匹配)，
+		返回一个Element对象（也可看作是动态NodeList集合，只是集合中只包含一个匹配的元素，但也会实时反映DOM节点的变化），
+		若当前文档中拥有特定ID的元素不存在则返回nul。-->
+		
+		<!--2、getElementsByClassName()：
+		接收一个参数，即包含一个或多个类名的字符串（类名通过空格分隔），
+		返回一个HTMLCollection动态集合（也可以说返回一个NodeList类数组对象），
+		集合中包含以当前元素为根节点，所有指定 class 名的子元素。-->
+		
+		<!--3、getElementsByTagName()：
+		接收一个参数：要取得的元素的标签名（不区分大小写），
+		返回一个HTMLCollection动态集合（也可以说返回一个NodeList类数组对象）,
+		集合中包含以当前元素为根节点（不包括当前元素自身），所有指定标签名的子元素，子元素的顺序是在当前元素的子树中出现的顺序，
+		如果没有搜索到元素则集合为空。
+		-->
+		
+		<!-- 4、getElementsByName()：
+		接收一个参数：带有给定name属性值的元素，返回一个动态NodeList类数组对象，
+		对象中包含以当前元素为根节点，所有指定name属性值的子元素。最常用的场景是取得单选按钮。-->
+		
+		<!--5、querySelector()：
+		接收一个参数：一个包含一个或多个CSS 选择器的字符串（多个选择器以逗号分隔），
+		返回匹配指定CSS选择器的第一个元素节点（无法选中CSS伪元素），
+		没有发现匹配的节点则返回null。
+		如果要匹配的ID或选择器不符合 CSS 语法（比如不恰当地使用了冒号或者空格），
+		你必须用反斜杠将这些字符转义。由于 JavaScript 中，反斜杠是转义字符，所以当你输入一个文本串时，
+		你必须将它转义两次（一次是为 JavaScript 字符串转义，另一次是为 querySelector 转义）：-->
+		
+		<!--6、querySelectorAll()：
+		接收一个参数：一个包含一个或多个CSS 选择器的字符串（多个选择器以逗号分隔），
+		返回静态NodeList对象集合，该集合中包含匹配指定CSS选择器的所有节点，
+		元素节点的变化无法实时反映在结果中；如果参数中包含CSS伪元素则返回一个空的对象集合。 -->
+		
+		<!--7、elementFromPoint()：
+		接收两个参数：分别是相对于当前窗口左上角的横纵坐标，单位为CSS像素，不需要加单位；
+		返回位于页面指定位置的元素，如果该元素不可返回（如滚动条）则返回它的父元素，
+		如果坐标值无意义（如负值）则返回null。-->
+		<div id="myDiv">
+		    <p class="myP">hello world</p>
+		    <p class="myP">hello dolby</p>
+		    <p class="myP">hello dot</p>
+		    <p class="myP">hello bean</p>
+		  </div>
+		  <script>
+		    var div = document.getElementById("myDiv");
+		    console.log(div); //(1)
+		    var body=document.querySelector('body');
+		    body.removeChild(div);
+		    console.log(body); //(2)
+		  </script>
+	</body>
+</html>

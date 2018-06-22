@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--点击按钮，异步动态加载图片-->
+		<!--请求一个提供json数据的URL-->
+		<button id="loadBtn">加载</button>
+		<script src="js/mylib.js"></script>
+		<script>
+			+function(){
+				bind($('loadBtn'),'click',function(){
+					//创建异步请求对象 XMLHttpRequest
+					var xhr = new XMLHttpRequest();
+					//如果对象创建好了
+					if(xhr){
+						var url = 'http://api.tianapi.com/meinv/?key=bd3755ffd8c953899c9ee439644e019c&num=10'//请求的资源
+						//第一个参数---请求的方式get或者post
+						//第二个参数：请求资源对应的URL（统一资源定位符）
+						//第三个参数：true表示异步请求（不中断用户体验的非阻塞请求）
+						
+						xhr.open('get',url,true);
+						//就绪状态被改变的事件onreadystatechange
+						xhr.onreadystatechange = function(){
+							//如果就绪状态是4 状态码是200 ，就访问成功了
+							if(xhr.readyState==4 && xhr.status ==200){
+								var json = JSON.parse(xhr.responseText);
+								var mmList = json.newslist;
+								for(var i=0;i<mmList.length;i+=1){
+									var mm = mmList[i];
+									//动态创建<img>标签，并绑定src属性
+									var img = document.createElement('img');
+									img.src = mm.picUrl;
+									img.width = 300;
+									document.body.appendChild(img);
+//									document.body.insertBefore(img,$('loadBtn'));
+								}
+							}
+						};
+						xhr.send();//发送请求
+						
+					}
+					//如果不能创建对象，就给出提示框
+					else{
+						alert('你的浏览器不兼容');
+					}
+				});
+			}();
+		</script>
+	</body>
+</html>

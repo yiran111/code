@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>	
+		<style>
+			#page ul li{
+				list-style: none;
+				width: 160px;
+				height: 40px;
+				text-align: center;
+				border-bottom: 1px solid darkgrey;
+				background-color: green;
+				line-height: 40px;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="page">
+			<h1 id="header">List</h1>
+			<h2>Buy groceries</h2>
+			
+			<ul>
+				<li id="one" class="hot"><em>fresh</em>&nbsp;figs</li>
+				<li id="two" class="hot">pine nuts</li>
+				<li id="three" class="hot">honey</li>
+				<li id="four">balsamic vinegar</li>
+			</ul>
+			
+		<!--引入jQuery:方式1-->
+		<!--<script src="js/jquery.min.js"></script>-->
+		<!--引入jquery,在有网和商业编程下集成jquery,用cdn加速   ：方式2-->
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+//		alert(window.$);检查是否加载成功jQuery
+		
+		//$（）函数，回调函数，在整个页面加载成功后自动调用 函数
+		$(function(){
+		//给大于0的，就是从第一个后给li绑定删除事件
+			$('#page li:gt(0)').on('click',function(evt){
+//				$(evt.target).remove()；    //点击任何一个li 就可以实现删除
+				$(evt.target).fadeOut(2000);    //每个2秒淡出屏幕，也是删除的一种方式
+			});
+			//取到li里的内容
+			$('#page li').html()
+			//把li里的内容换成hello
+			
+		});
+	</script>
+	</body>
+</html>

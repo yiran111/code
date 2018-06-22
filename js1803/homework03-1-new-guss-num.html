@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#container {
+				width: 450px;
+				margin: 0 auto;
+			}
+			#num {
+				text-align: center;
+				display: inline-block;
+				width: 180px;
+				height: 30px;
+				border: none;
+				border-bottom: 1px solid darkgray;
+				font-size: 18px;
+				/*清除外边框的线*/
+				outline: none;
+			}
+			#ok,#reset{
+				background-color: red;
+				color: white;
+				width: 120px;
+				height: 30px;
+				font-size: 18px;
+				border: none;
+				cursor: pointer;
+				outline: none;
+			}
+			#hint {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<input id="num" type="text" placeholder="请输入你猜的数字">
+			<button id="ok">确定</button>
+			<button id="reset">重新开始</button>
+			<div id="hint"></div>
+		</div>
+		
+		<!--引入外部js-->
+		<script src="js/mylib.js"></script>
+		
+		<script>
+			 
+			
+			(function() {
+				function guss() {
+					total += 1;//每猜一次，统计的次数加1
+					var numStr = $('num').value;	//去拿到输入框input的值
+					var num = parseInt(numStr);		//将其转换为整数
+					//判断两个数在数值是否相等，如果相等就执行数值的比较
+					if (num == numStr) {
+						var hint = '你猜的是' + num + ', ';
+						if (num < answer) {
+							hint += '大一点!';
+						} else if (num > answer) {
+							hint += '小一点!';
+						} else {
+							hint += '恭喜你猜对了!';
+							$('ok').disabled = true;//猜对以后，让按钮失效，不再使能，停止游戏
+							$('num').disabled = ture;
+							//如果所猜次数大于7，就提示智商着急
+							if (total > 7) {
+								hint += '<br>智商捉急!!!';
+							}
+						}
+						$('hint').innerHTML += '<p>' + hint + '</p>';
+					} 
+					//如果输入的数值转换后在数值上不等，比如输入的是字母或者其他字符，就给出提示框；并且清空输入框的内容，重新获取焦点，便于再次输入
+					else {
+						alert('输入错误, 请重新输入!');
+					}
+					$('num').value = ''; //输入有误时，清空文本框
+					$('num').focus();	//清空之后，重新获取焦点,便于再次输入
+				}
+				
+				var answer = parseInt(Math.random() * 100 + 1);//产生1-100的随机数 math.random()产生0-1的随机数
+				var total = 0;	//统计猜数次数
+				
+				//输入回车时，自动调用函数
+				bind($('num','keypress',function(evt){
+					evt = evt || window.event;
+					if(evt.keyCode==13){
+						guss();
+					}
+					// 如果输入的不是数字，就将其赋值为空字符
+					else if(evt.keyCode < 48 || evt.keyCode > 57){
+						//当bind 函数的事件是keyup时，可以用下面这段代码
+//						var val = $('num').value;
+//						$('num').value = handleInput(val);
+						preventDefault(evt);
+					}
+				});
+				
+				//调用js 里的函数bind
+				bind($('ok'), 'click', guss);
+				bind($('reset'),'click',function(){
+					var answer = parseInt(Math.random() * 100 + 1);//产生1-100的随机数 math.random()产生0-1的随机数
+				    var total = 0;	//统计猜数次数
+				    $('hunt').innerHTML = '';//清空以前输入的内容
+				    $('num').disabled = false;//重新启用输入框
+				    $('ok').disabled=false;//重新启用按钮
+				     
+				});
+			})();
+		</script>
+	</body>
+</html>
+
+
+<!--
+	程序中隐藏的问题和存在的缺陷成为bug
+	解决bug的过程成为debug(调试)
+	在怀疑程序出问题的地方放一个断点；
+	启动调试程序在断点处单步执行
+-->
+
+
+
+
+
+
+
+
+
+

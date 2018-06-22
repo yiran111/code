@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>本地存储</title>
+	</head>
+	<body>
+		<form id="login">
+			<p>
+				<input type="text" name="username" placeholder="请输入用户名">
+				<span></span>
+			</p>
+			<p>
+				<input type="password" name="password" placeholder="密码">
+			</p>
+			<p>
+				<input type="submit" value="登录">
+			</p>
+		</form>
+		<script src="js/jquery.min.js"></script>
+		<script>
+			$(function(){
+				var x = [];	//创建数组
+				var y = /^$/;	//创建正则表达式
+				var z = {}; //创建对象
+				
+				$('#login').on('submit',function(evt){
+					$('input:first').val(localStorage.uid);
+					evt.preventDefault();//阻止事件的默认行为，阻止表单自己提交
+					
+//					var username = $('input:first').val().trim();// 方式1：拿到用户名，并去掉用户名两头的空格
+					var username = $('input:first').val();
+					if(/^[a-zA-Z][a-zA-MozCSSKeyframeRule-9_]{5,19}$/.test(username)){
+						localStorage.uid = username;
+					evt.target.submit();//验证用户名和密码都通过后，手动提交表单
+					}else{
+						$('input:first').next().text('请输入有效用户名');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

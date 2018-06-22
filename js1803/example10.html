@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="http://www.baidu.com">百度一下</a>
+		
+		<script>
+			//拿到所有的a标签,存在一个列表里
+			var aList = document.getElementsByTagName('a');
+			//取列表里下标为0的元素
+//			alert(aList[0])
+			aList[0].addEventListener('click',function(evt){
+				evt = evt || window.event;
+				if(!confirm('真的去百度吗？')){
+					//点取消，不去百度,阻止 事件的默认行为evt.preventDefault()
+//					evt.preventDefault();
+					
+					if(evt.preventDefault){
+						evt.preventDefault();
+					}else{
+						evt.returnValue = false;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

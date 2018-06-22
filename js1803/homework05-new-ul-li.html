@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				margin: 10px 20px;
+			}
+			#fruits li{
+				width: 150px;
+				height: 30px;
+				background-color: darkgreen;
+				color: white;
+				list-style: none;
+				border-bottom: 1px solid lightgray;
+				text-align: center;
+				font: 18px/30px "微软雅黑";
+			}
+			#fruits li a{
+				text-decoration: none;
+				margin-left: 30px;
+			}
+			#fruits li a:link,#fruit a:visited{
+				color: white;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<h1>水果</h1>
+		<hr />
+		<ul id="fruits">
+			<li>苹果<a href="javascript:void(0);">x</a></li>
+			<li>香蕉<a href="javascript:void(0);">x</a></li>
+			<li>草莓<a href="javascript:void(0);">x</a></li>
+		</ul>
+		<input id="fruit" type="text" />
+		<button id="ok">确定</button>
+		
+		<script src="js/mylib.js"></script>
+		<script>
+			function removeItem(evt){
+						evt = evt || window.event;
+						var target = evt.target || evt.srcElement;
+						//parentNode拿到父节点li
+						$('fruits').removeChild(target.parentNode);
+					}
+			+function(){
+				var aList = document.querySelectorAll('#fruits li a');
+				for(var i=0; i<aList.length; i+=1){
+					bind(aList[i],'click',function(evt){
+						evt = evt || window.event;
+						var target = evt.target || evt.srcElement;
+						//parentNode拿到父节点li  removeChild 删除节点
+						$('fruits').removeChild(target.parentNode);
+//						$('fruit').children  取出所有子节点
+//						$('fruits').firstChild   取出第一个子节点
+//						$('fruits').lastChild    取出最后一个子节点
+					});
+				}
+				bind($('ok'),'click',function(){
+					//拿到fruit对应的值，的到一个列表
+					var fruit = $('fruit').value;
+					//trim去掉空格，如果fruit列表不为空
+					if(fruit.trim().length>0){
+						// createElement 创建节点
+						var li = document.createElement('li');
+						li.textContent = fruit;
+						$('fruits').appendChild(li);
+						var a = document.createElement('a');
+						a.href = 'javascript:void(0)';
+						a.textContent = 'x';
+						bind(a,'click',removeItem);
+						li.appendChild(a);
+						//修改样式
+						li.style.backgroungColor = 'coral';
+						li.style.fontFamily ='楷体';
+						
+						
+						
+						//在最后面添加新的li
+//						$('fruits').appendChild(li);
+
+						//插入到第一个节点前面
+						$('fruits').insertBefore(li,$('fruits').firstChild);	
+						$('fruit').value = '';
+
+										
+					}
+				});
+			}();
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>让人跑起来</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				
+			}
+			#content{
+				width: 900px;
+				height: 800px;
+				/*让图片处于正上方中间位置*/
+				margin: 0 auto;
+				display: inline-block;
+				width: 150px;
+				height: 200px;
+				position: absolute;
+				top: 250px;
+				left: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content" onmousemove="run()">
+			<img id='person' src="runner/runner0.jpg">
+		</div>
+		<script>
+			var img=document.getElementById('person');
+			currentIndex = -1;
+			setInterval(function run(){
+				currentIndex +=1;
+				currentIndex %=5;
+				img.src = 'runner/runner'+(currentIndex + 1)+'.jpg';
+			},100);
+			
+		</script>
+	</body>
+</html>

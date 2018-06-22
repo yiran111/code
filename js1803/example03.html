@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>在网页右上角显示时间，并且时间是可以变化的</title>
+		<style>
+			#timer{
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="timer"></div>
+		
+		<script>
+			//将星期几用列表存起来
+			var weekdays =['日','一','二','三','四','五','六'];
+			
+			//通过id获取div里的内容
+			var div=document.getElementById('timer');
+			setInterval(function(){
+				//js里有内置时间对象date,创建对象时要加new，如果不传参数，可以省略括号
+				
+				var date = new Date();
+				var year = date.getFullYear();	//拿到当前的年
+				var month = date.getMonth();     //month 从0 开始计算
+				var day = date.getDate();		//获取当前是哪一天
+				var hour = date.getHours();		//获取当前小时数
+				var minute = date.getMinutes();		//获取当前分钟数
+				var second = date.getSeconds();		//获取当前秒数
+				var weekday = weekdays[date.getDay()];		//获取当前是星期几
+				//显示格式1，如果day ,hour,minute,second小于10 ，则在前边填一个0
+//				var fullstr = year+'年'+(month<10?'0'+month:month)+'月'+(day<10?'0'+day:day)+'日'+(hour<10?'0'+hour:hour)+':'+(minute<10?'0'+minute:minute)+':'+(second<10?'0'+second:second)+'星期'+weekday;
+//				div.textContent=fullstr;
+
+				//显示格式2
+				var fullstr = year+'年'+(month<10?'0'+month:month)+'月'+(day<10?'0'+day:day)+'日'+"&nbsp;&nbsp"+(hour<10?'0'+hour:hour)+':'+(minute<10?'0'+minute:minute)+':'+(second<10?'0'+second:second)+':&nbsp;&nbsp'+'星期'+weekday;
+				div.innerHTML = fullstr;
+			},1000);
+		</script>
+	</body>
+</html>

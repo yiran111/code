@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#div1{
+				width: 400px;
+				height: 400px;
+				margin: 0 auto;
+				background-color: red;
+				position:relative;
+			}
+			#div2{
+				width: 300px;
+				height: 300px;
+				background-color: aquamarine;
+				position:absolute;
+				top:50px;
+				left:50px;
+				
+			}
+			#div3{
+				width: 200px;
+				height: 200px;
+				background-color: orchid;
+				position:absolute;
+				top:50px;
+				left:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+		</div>
+		<script>
+//			function foo(evt){
+//				//要么去前面的，要么取后面的，取到事件解决浏览器兼容性问题
+//				evt = evt || window.event;
+//				//获取事件源（那个元素上发生事件）
+//				target = evt.target || evt.srcElement;
+//				
+//				alert('I am' + target.id);
+//			}
+			function f1(){
+				alert('I am div1');
+			};
+			function f2(){
+				alert('I am div2');
+			};
+			function f3(evt){
+				alert('I am div3');
+				
+				
+				evt = evt ||window.event
+				//阻止事件冒泡，阻止事件的传播，IE11以下都不兼容
+				if(evt.stopPropagation){
+					evt.stopPropagation();
+				}else{
+					evt.cancelBubble = true;//取消冒泡，阻止事件传播
+				}
+			};
+			
+			
+			//事件冒泡是--从内层向外层传递
+			//事件冒泡，内嵌的元素，在响应事件之后，会继续将事件冒泡传递到父元素
+			var fs = [f1,f2,f3];
+			var ids = ['div1','div2','div3'];
+			for(var i = 0;i<ids.length;i+=1){
+				var div = document.getElementById(ids[i]);
+				if(div.addEventListener){
+					div.addEventListener('click',fs[i])
+					
+					//事件捕获，如果需要事件捕获，需要传递第三个参数，赋值为true，传递顺序----从外到内
+//					div.addEventListener('click',fs[i],true)
+					
+				}else{
+					div.attatchEvent('onclick',fs[i]);
+			}
+				}
+		</script>
+	</body>
+</html>
+
+
+<!--
+	LEGB:Local  Embeddod   Global  Buttlin  
+	js作用域：要么全局作用域，要么是函数内部的
+-->

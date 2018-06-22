@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				margin: 10px auto;
+				
+			}
+			#fruits li{
+				width: 200px;
+				height: 50px;
+				background-color: darkgreen;
+				color: white;
+				list-style: none;
+				border-bottom: 1px solid lightgray;
+				text-align: center;
+				font: 18px/30px "微软雅黑";
+			}
+			#fruits li a{
+				text-decoration: none;
+				margin-left: 30px;
+			}
+			#fruits li a:link,#fruit a:visited{
+				color: white;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<h1>水果</h1>
+		<hr />
+		<ul id="fruits">
+			
+			<li id="fruit1">苹果<a href="javascript:void(0);">x</a></li>
+			<li id="fruit2">香蕉<a href="javascript:void(0);">x</a></li>
+			<li id="fruit3">草莓<a href="javascript:void(0);">x</a></li>
+			<li>
+				<input id="fruit" type="text"  placeholder="请输入水果名称">
+				<button id="ok">添加</button>
+			</li>
+			
+		</ul>
+		<script src="js/jquery.min.js"></script>
+		
+		<script>
+			//======================jquery的$函数的用法：=====================
+			// 1.如果$函数的参数是一个函数，那么这个函数是文档加载完毕后要执行的回调函数
+			// 2.如果$函数的参数是选择器字符串，那么$函数会返回一个jquery对象，这个对象是标签
+			//3.如果$函数的参数是一个原生的js对象，那么$函数返回的是一个与原生对象对应的jquery对象
+			//4.如果$函数的参数是一个标签，那么$函数则会创建与之对应的元素而且返回对应的jquery对象
+			//1.$ 传函数
+			
+			$(function(){
+				$(function removeItem(evt){
+					$(evt.target).parent()
+					.css('position','relative')
+					.animate(
+						{'left':'-350px','height':'0'},
+						360,
+						'linear',
+						function(){
+							$(this).remove();
+						}
+					);
+				}	
+				$('#fruits li').hide().each(function(index){
+					//延迟，让列表内容一个一个的出来，每个延时0.6秒，第一个不延迟。
+					$(this).delay(600*index).fadeIn(600);
+				});
+				var index = 4;
+				//2.$ 传选择器
+				$('#fruits li' not('#fruits li:last'),one('click'),function(evt){
+					var evt = $(evt.target);
+					target.append($('<span>').text(target.attr('id')));	
+				})	
+				
+				$('#fruits li a').on('click',function(evt){
+					//3.$ 传原生对象
+					$(evt.target).parent().remove();
+				});	
+				
+				//添加水果函数,并可以删除添加的东西
+				$('#ok').on('click',function(){
+					//获取到fruit 即input里输入的值，并修剪掉空字符
+					var fruit = $('#fruit').val().trim();
+					//如果input里的值不为空
+					if(fruit.length>0){
+						//在ul里添加新的列表项li
+						$('#fruits').append(
+							//在li里添加文本
+							$('<li>').text(fruit).append(
+								//在文本后添加a标签和标签里的href属性
+								//4.$ 传标签
+								$('<a>').attr('href','javascript:void(0);')
+								//在属性后添加字符串"x"
+									.text('x')
+									//给"x"绑定单击事件
+									.one('click',function(evt){
+										var target
+										//获取单击的事件源a，找到父节点li，然后删除li
+										$(evt.target).parent().remove();
+								}
+							)
+						)
+					);
+					$('#fruit').val('');
+				}
+			});
+		});
+		</script>
+		<script>
+			//问题:js原生对象与jQuery对象如何转换
+			//jquery对象的本质是一个数组
+			//$(js对象)-------------------------------->jquery 对象
+			//jQuery对象.get(index) / jQuery对象[index]------->js对象
+		</script>
+		
+	</body>
+</html>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				margin:30px 100px;
+				
+			}
+			ul li{
+				/*去掉li前边的小圆点*/
+				list-style-type: none;
+				background-color: darkgreen;
+				color: white;
+				display: inline-block;
+				width: 100px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				margin: 10px;
+				
+			}
+			
+			#div1{
+				margin: 20px;
+			}
+			
+			#info{
+				display: inline-block;
+				width: 120px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				border: none;
+				border-bottom: 1px solid darkgray;
+				
+			}
+			#btn {
+				background-color: greenyellow;
+				color: white;
+				width: 80px;
+				height: 30px;
+				border: none;
+				cursor: pointer;
+				outline: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<ul id="mychoice">
+			<li class="fruit" onclick="delchoice()">苹果</li><br />
+			<li class="fruit" onclick="delchoice()">桃子</li><br />
+			<li class="fruit" onclick="delchoice()">橘子</li><br />
+			<li class="fruit" onclick="delchoice()">橙子</li><br />
+			<li class="fruit" onclick="delchoice()">草莓</li><br />
+		</ul>
+		<div id="div1">
+			<input id="info" placeholder="添加的类目">
+			<button id="btn" onclick="addchoice()">添加</button>
+		</div>
+		
+		<script>
+			function addchoice(){
+				//获得输入
+				var a = document.getElementById('info').value;
+				//创建li
+				var li = document.createElement('li');
+				li.innerHTML= a;
+				//添加
+				document.getElementById('mychoice').appendChild(li);				
+			};
+			
+			function delchoice(){
+				var b = document.getElementsByClassName('fruit').value;
+				
+				
+				
+				
+			};
+		</script>
+		
+	</body>
+</html>
+

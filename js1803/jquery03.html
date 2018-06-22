@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="loadBtn">加载</button>
+		<script src="js/jquery.min.js"></script>
+		<script>
+			$(function(){
+				var url = 'http://api.tianapi.com/meinv/?key=bd3755ffd8c953899c9ee439644e019c&num=10'//请求的资源
+				$('#loadBtn').on('click',function(){
+					//get请求拿json数据，这里的对象就是json
+					$.getJSON(url,function(json){
+						for(var i=0;i<json.newslist.length;i+=1){
+							var mm = json.newslist[i];
+							$('<img>').attr('src',mm.picUrl).attr('width',300)
+							.insertBefore($('#loadBtn'));
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
