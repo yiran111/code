@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="" method="post">
+			<label>你的爱好是：&nbsp;</label>
+			<input id="" type="checkbox" name="fav">旅游
+			<input type="checkbox" name="fav">画画
+			<input type="checkbox" name="fav">吃饭
+			<input type="checkbox" name="fav">手工
+			<input type="checkbox" name="fav">阅读
+			<input type="checkbox" name="fav">其他
+			<a href="javascript:void(0);">全选</a>
+			<a href="javascript:void(0);">取消</a>
+			<a href="javascript:void(0);">反选</a>
+		</form>
+		<script>
+			//即是调用函数，避免使用全局变量
+			(function(){
+				var allAnchors = document.querySelectorAll('form a');
+				var favList = document.querySelectorAll('input[name=fav]');
+				
+				allAnchors[0].addEventListener('click',function(){
+					for(var i =0;i<favList.length;i+=1){
+						//设置属性，属性名和属性名
+//						favList[i].setAttribute('checked','checked');
+						favList[i].checked = true;
+					}
+				});
+				allAnchors[1].addEventListener('click',function(){
+					
+					for(var i =0;i<favList.length;i+=1){
+						//移除属性，可以只给属性不给属性名
+//						favList[i].removeAttribute('checked');
+						favList[i].checked = false;
+					}
+				});
+				allAnchors[2].addEventListener('click',function(){
+					
+					for(var i =0;i<favList.length;i+=1){
+						favList[i].checked = !favList[i].checked;
+					}
+				});
+			})();
+		</script>
+	</body>
+</html>
